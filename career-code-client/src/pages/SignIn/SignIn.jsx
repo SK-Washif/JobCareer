@@ -1,6 +1,7 @@
 import React, { use } from 'react'
 import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 import { Form } from 'react-router';
+import SocialLogin from '../Shared/SocialLogin';
 
 const SignIn = () => {
 
@@ -46,6 +47,9 @@ const SignIn = () => {
           <button className="btn btn-neutral mt-4">SignIn</button>
         </fieldset>
         </Form>
+
+        <SocialLogin></SocialLogin>
+
       </div>
     </div>
   </div>
