@@ -1,14 +1,31 @@
 import React from "react";
 import { Form } from "react-router";
+import useAuth from '../../hooks/useAuth'
 
 const AddJob = () => {
+
+  const { user } = useAuth();
 
   const handleAddJob = e =>{
     e.preventDefault();
     const form = e.target;
     const formData =new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    // console.log(data);
+    const {min, max, currency, ...newJob} = data;
+    newJob.salaryRange = {min, max, currency}
+
+    // process requirements
+    const requirementsString = newJob.requirements;
+    const requirementsDirty = requirementsString.split(',');
+    const requirementsClean = requirementsDirty.map(req => req.trim());
+    newJob.requirements = requirementsClean;
+
+    //process responsibilities
+    newJob.responsibilities = newJob.responsibilities.split(',').map(res => res.trim());
+
+    console.log(newJob);
+    
   }
 
   return (
@@ -65,18 +82,21 @@ const AddJob = () => {
             <input
               className="btn"
               type="radio"
+              value="On-Site"
               name="jobType"
               aria-label="On-Site"
             />
             <input
               className="btn"
               type="radio"
+              value="Remote"
               name="jobType"
               aria-label="Remote"
             />
             <input
               className="btn"
               type="radio"
+              value="Hybrid"
               name="jobType"
               aria-label="Hybrid"
             />
@@ -149,7 +169,7 @@ const AddJob = () => {
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
           <legend className="fieldset-legend">Job Requirements</legend>
 
-          <textarea className="textarea" name="description" placeholder="Job Requirements(separated by comma)"></textarea>
+          <textarea className="textarea" name="requirements" placeholder="Job Requirements(separated by comma)"></textarea>
 
         </fieldset>
 
@@ -175,7 +195,8 @@ const AddJob = () => {
           <label className="label">HR Email</label>
           <input
             type="text"
-            name="email"
+            name="hr_email"
+            defaultValue={user.email}
             className="input"
             placeholder="HR Email"
           />
