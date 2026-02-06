@@ -24,6 +24,12 @@ const NavBar = () => {
     </>
     }
 
+    {
+    user && <>
+    <li><NavLink to='/addJob'>Add Job</NavLink></li>
+    </>
+    }
+
       </>
   return (
     <div className="navbar bg-base-100 shadow-sm">
