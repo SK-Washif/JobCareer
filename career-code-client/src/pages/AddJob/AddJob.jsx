@@ -122,7 +122,7 @@ const AddJob = () => {
                 <option disabled={true}>Select a Currency</option>
                 <option>BDT</option>
                 <option>USD</option>
-                <option>EU</option>
+                <option>Eu</option>
               </select>
           </div>
           </div>
